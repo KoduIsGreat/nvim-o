@@ -2,7 +2,10 @@
 
 -- Only required if you have packer configured as `opt`
 vim.cmd.packadd('packer.nvim')
-
+vim.keymap.set('n', '<leader>pcp', '<cmd>PackerCompile<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>pci', '<cmd>PackerInstall<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>pcs', '<cmd>PackerSync<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>pcu', '<cmd>PackerUpdate<CR>', { noremap = true, silent = true })
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
@@ -15,6 +18,10 @@ return require('packer').startup(function(use)
 		  vim.cmd('colorscheme rose-pine')
 	  end
   })
+  use {
+     'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
   
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -26,7 +33,27 @@ return require('packer').startup(function(use)
   use("nvim-treesitter/playground")
   use 'nvim-treesitter/nvim-treesitter-context'
   use("tpope/vim-fugitive")
+  use {
+  "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      }
+     end
+  }
   use("github/copilot.vim")
+   use({
+    'willothy/nvim-cokeline',
+    requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
+    config = function()
+      require('cokeline').setup()
+    end
+  })
+  use 'nvim-tree/nvim-web-devicons'
   use({
       "folke/trouble.nvim",
       config = function()
