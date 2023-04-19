@@ -33,6 +33,13 @@ return require('packer').startup(function(use)
   use("nvim-treesitter/playground")
   use 'nvim-treesitter/nvim-treesitter-context'
   use("tpope/vim-fugitive")
+  use("tpope/vim-dadbod")
+  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+  require("toggleterm").setup()
+    end}
+  use("kristijanhusak/vim-dadbod-completion")
+  use("kristijanhusak/vim-dadbod-ui")
+  use 'hsalem7/nvim-k8s'
   use {
   "folke/which-key.nvim",
     config = function()
