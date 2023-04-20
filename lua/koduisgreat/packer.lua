@@ -10,7 +10,7 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-
+  -- Appearance plugins
   use({
 	  'rose-pine/neovim',
 	  as = 'rose-pine',
@@ -22,12 +22,28 @@ return require('packer').startup(function(use)
      'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
-  
+  -- Fuzzy finding
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use {
+    'KadoBOT/nvim-spotify',
+    requires = 'nvim-telescope/telescope.nvim',
+    config = function()
+        local spotify = require'nvim-spotify'
+
+        spotify.setup {
+            -- default opts
+            status = {
+                update_interval = 10000, -- the interval (ms) to check for what's currently playing
+                format = '%s %t by %a' -- spotify-tui --format argument
+            }
+        }
+    end,
+    run = 'make'
+}
   use("mbbill/undotree")
   use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
   use("nvim-treesitter/playground")
@@ -74,7 +90,17 @@ return require('packer').startup(function(use)
   })
   use("theprimeagen/harpoon")
   use("theprimeagen/refactoring.nvim")
-
+  use({
+  "jackMort/ChatGPT.nvim",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  })
   use("folke/zen-mode.nvim")
   use {
 	  'VonHeikemen/lsp-zero.nvim',
