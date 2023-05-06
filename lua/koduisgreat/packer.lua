@@ -6,11 +6,12 @@ vim.keymap.set('n', '<leader>pcp', '<cmd>PackerCompile<CR>', { noremap = true, s
 vim.keymap.set('n', '<leader>pci', '<cmd>PackerInstall<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>pcs', '<cmd>PackerSync<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>pcu', '<cmd>PackerUpdate<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>pcc', '<cmd>PackerClean<CR>', { noremap = true, silent = true })   
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-  -- Golang plugin
-  use 'ray-x/go.vim'
+  -- Language Specific  Plugins
+  use 'ray-x/go.nvim'
   -- Appearance plugins
   use({
 	  'rose-pine/neovim',
@@ -19,44 +20,28 @@ return require('packer').startup(function(use)
 		  vim.cmd('colorscheme rose-pine')
 	  end
   })
+  use 'nvim-tree/nvim-web-devicons'
   use {
      'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
-  -- Fuzzy finding
+  use({
+    'willothy/nvim-cokeline',
+    requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
+    config = function()
+      require('cokeline').setup()
+    end
+  })
+  -- Developer expereince plugins
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
-  use {
-    'KadoBOT/nvim-spotify',
-    requires = 'nvim-telescope/telescope.nvim',
-    config = function()
-        local spotify = require'nvim-spotify'
-
-        spotify.setup {
-            -- default opts
-            status = {
-                update_interval = 10000, -- the interval (ms) to check for what's currently playing
-                format = '%s %t by %a' -- spotify-tui --format argument
-            }
-        }
-    end,
-    run = 'make'
-}
-  use("mbbill/undotree")
-  use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
-  use("nvim-treesitter/playground")
-  use 'nvim-treesitter/nvim-treesitter-context'
   use("tpope/vim-fugitive")
   use("tpope/vim-dadbod")
-  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
-  require("toggleterm").setup()
-    end}
   use("kristijanhusak/vim-dadbod-completion")
   use("kristijanhusak/vim-dadbod-ui")
-  use 'hsalem7/nvim-k8s'
   use {
   "folke/which-key.nvim",
     config = function()
@@ -70,14 +55,6 @@ return require('packer').startup(function(use)
      end
   }
   use("github/copilot.vim")
-   use({
-    'willothy/nvim-cokeline',
-    requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
-    config = function()
-      require('cokeline').setup()
-    end
-  })
-  use 'nvim-tree/nvim-web-devicons'
   use({
       "folke/trouble.nvim",
       config = function()
@@ -91,18 +68,11 @@ return require('packer').startup(function(use)
   })
   use("theprimeagen/harpoon")
   use("theprimeagen/refactoring.nvim")
-  use({
-  "jackMort/ChatGPT.nvim",
-    config = function()
-      require("chatgpt").setup()
-    end,
-    requires = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
-    }
-  })
-  use("folke/zen-mode.nvim")
+  use("mbbill/undotree")
+  use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
+  use("nvim-treesitter/playground")
+  use 'nvim-treesitter/nvim-treesitter-context'
+  -- LSP plugins
   use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v1.x',
