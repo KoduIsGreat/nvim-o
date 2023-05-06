@@ -9,7 +9,8 @@ vim.keymap.set('n', '<leader>pcu', '<cmd>PackerUpdate<CR>', { noremap = true, si
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-
+  -- Golang plugin
+  use 'ray-x/go.vim'
   -- Appearance plugins
   use({
 	  'rose-pine/neovim',
