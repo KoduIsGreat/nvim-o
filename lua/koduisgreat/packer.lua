@@ -38,6 +38,10 @@ return require('packer').startup(function(use)
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use {
+	"windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
   use("tpope/vim-fugitive")
   use("tpope/vim-dadbod")
   use("kristijanhusak/vim-dadbod-completion")
