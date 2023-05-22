@@ -1,5 +1,4 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
 -- Only required if you have packer configured as `opt`
 vim.cmd.packadd('packer.nvim')
 vim.keymap.set('n', '<leader>pcp', '<cmd>PackerCompile<CR>', { noremap = true, silent = true })
@@ -65,6 +64,18 @@ return require('packer').startup(function(use)
       }
      end
   }
+    use {
+      'nvim-tree/nvim-tree.lua',
+      requires = {
+        'nvim-tree/nvim-web-devicons', -- optional
+      },
+      config = function()
+        on_attach = require('T').on_attach
+        require("nvim-tree").setup {
+            on_attach = on_attach,
+        }
+      end
+    }
   use("github/copilot.vim")
   use({
       "folke/trouble.nvim",
