@@ -10,7 +10,13 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
     -- Language Specific  Plugins
-    use 'ray-x/go.nvim'
+    use({
+        'ray-x/go.nvim',
+        config = function()
+            require('go').setup()
+        end
+    })
+    use 'ray-x/guihua.lua' -- recommended if need floating window support
     -- Appearance plugins
     use({
         'rose-pine/neovim',
@@ -32,6 +38,8 @@ return require('packer').startup(function(use)
         end
     })
     -- Developer expereince plugins
+    use 'mfussenegger/nvim-dap'
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         -- or                            , branch = '0.1.x',
