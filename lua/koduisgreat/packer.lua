@@ -39,7 +39,8 @@ return require('packer').startup(function(use)
     })
     -- Developer expereince plugins
     use 'mfussenegger/nvim-dap'
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         -- or                            , branch = '0.1.x',
@@ -51,6 +52,7 @@ return require('packer').startup(function(use)
     }
     use("tpope/vim-fugitive")
     use("tpope/vim-dadbod")
+    use("tpope/vim-commentary")
     use("kristijanhusak/vim-dadbod-completion")
     use("kristijanhusak/vim-dadbod-ui")
     use({
