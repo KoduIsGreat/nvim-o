@@ -31,17 +31,8 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
-    use({
-        'willothy/nvim-cokeline',
-        requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
-        config = function()
-            require('cokeline').setup()
-        end
-    })
     -- Developer expereince plugins
-    use 'mfussenegger/nvim-dap'
 
-    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         -- or                            , branch = '0.1.x',
@@ -56,13 +47,6 @@ return require('packer').startup(function(use)
     use("tpope/vim-commentary")
     use("kristijanhusak/vim-dadbod-completion")
     use("kristijanhusak/vim-dadbod-ui")
-    use({
-        'ray-x/navigator.lua',
-        requires = {
-            { 'ray-x/guihua.lua',     run = 'cd lua/fzy && make' },
-            { 'neovim/nvim-lspconfig' },
-        },
-    })
     use {
         "folke/which-key.nvim",
         config = function()
@@ -98,12 +82,29 @@ return require('packer').startup(function(use)
     })
     use { 'mhartington/formatter.nvim' }
     use("theprimeagen/harpoon")
-    use("theprimeagen/refactoring.nvim")
     use("mbbill/undotree")
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use("nvim-treesitter/playground")
     use 'nvim-treesitter/nvim-treesitter-context'
     -- LSP plugins
+    use("williamboman/mason.nvim")
+
+    use({
+      "ray-x/navigator.lua",
+      requires = {
+        { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+        { "neovim/nvim-lspconfig" },
+        { "nvim-treesitter/nvim-treesitter" },
+      },
+      config = function()
+        require("navigator").setup({
+          mason = true,
+          lsp = {
+            disable_lsp = "all",
+          }
+        })
+      end,
+    })
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
