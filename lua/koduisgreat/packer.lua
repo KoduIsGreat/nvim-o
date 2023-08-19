@@ -25,6 +25,7 @@ return require('packer').startup(function(use)
             vim.cmd('colorscheme rose-pine')
         end
     })
+    use { "catppuccin/nvim", as = "catppuccin" }
     use 'nvim-tree/nvim-web-devicons'
     use {
         'nvim-lualine/lualine.nvim',
@@ -95,6 +96,7 @@ return require('packer').startup(function(use)
             }
         end
     })
+    use { 'mhartington/formatter.nvim' }
     use("theprimeagen/harpoon")
     use("theprimeagen/refactoring.nvim")
     use("mbbill/undotree")
